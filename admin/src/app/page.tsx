@@ -53,7 +53,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://nextstore-be.onrender.com/api/v1/home/admin');
+        const response = await axios.get('https://hanoibus.pro/system_data');
         const modifiedData = response.data.graph_data.map((route: RouteData) => ({
           ...route,
           graph_data: route.graph_data.map(graph => ({
@@ -123,7 +123,7 @@ export default function Home() {
   };
 
   const routeItems: MenuProps['items'] = apiData?.graph_data.map(route => ({
-    label: `Route ${route.route}`,
+    label: `${route.route}`,
     key: route.route,
   }));
 
@@ -213,81 +213,60 @@ export default function Home() {
           </div>
           <div>
             <Dropdown.Button menu={routeMenuProps}>
-              {selectedRouteData ? `Route ${selectedRouteData.route}` : 'Select Route'}
+              {selectedRouteData ? `${selectedRouteData.route}` : 'Select Route'}
             </Dropdown.Button>
           </div>
         </div>
         <div className={styles['total']}>
           <div className={styles['totalUser']}>
             <div className={styles['titl']}>
-              Total Passenger
+              Lượng hành khách
             </div>
             <div className={styles['num']}>
               {apiData ? apiData.sum_passenger : 'Loading...'}
             </div>
             <div className={styles['info']}>
               <Image width={32} height={32} src="/image/up.svg" alt="" />
-              <div className={styles['txt']}>
-                <div className={styles['txt1']}>
-                  8.5%
-                </div>
-                <div className={styles['txt2']}>
-                  Up from yesterday
-                </div>
-              </div>
+              
             </div>
             <Image className={styles['img']} width={80} height={80} src="/image/user.svg" alt="" />
           </div>
           <div className={styles['totalUser']}>
             <div className={styles['titl']}>
-              Current Route
+              Tuyến hiện tại
             </div>
             <div className={styles['num']}>
-              Route {selectedRouteData ? selectedRouteData.route : 'Loading...'}
+              {selectedRouteData ? selectedRouteData.route : 'Loading...'}
             </div>
             <div className={styles['info']}>
               <Image width={32} height={32} src="/image/up.svg" alt="" />
-              <div className={styles['txt']}>
-                <div className={styles['txt1']}>
-                  1.8%
-                </div>
-                <div className={styles['txt2']}>
-                  Up from yesterday
-                </div>
-              </div>
+              
             </div>
             <Image className={styles['img']} width={80} height={80} src="/image/pending.svg" alt="" />
           </div>
           <div className={styles['totalUser']}>
             <div className={styles['titl']}>
-              Route Passenger
+              Hành khách
             </div>
             <div className={styles['num']}>
               {selectedRouteData ? selectedRouteData.total_passenger : 'Loading...'}
             </div>
             <div className={styles['info']}>
               <Image width={32} height={32} src="/image/down.svg" alt="" />
-              <div className={styles['txt']}>
-                <div className={styles['txt3']}>
-                  4.3%
-                </div>
-                <div className={styles['txt2']}>
-                  Down from yesterday
-                </div>
-              </div>
+              
             </div>
             <Image className={styles['img']} width={80} height={80} src="/image/order.svg" alt="" />
           </div>
 
           <div className={styles['totalUser']}>
             <div className={styles['titl']}>
-              Top 5 routes
+              Top 5 tuyến
             </div>
             <div className={styles['numk']}>
               {top5Routes.map((route: RouteData, index: number) => (
                 <React.Fragment key={index}>
                   <div className={styles['numk2']}>
-                    <div className={styles['numkDiv']}> Route   {route.route} </div> <div className={styles['numkDiv2']}> {route.total_passenger} </div> <Image width={16} height={16} src="/image/team.svg" alt="" />
+                    <div className={styles['numkDiv']}> {route.route} </div> <div className={styles['numkDiv2']}> {route.total_passenger} </div> <Image width={16} height={16} src="/image/team.svg" alt="" />
                   </div>
                   <br />
                 </React.Fragment>
@@ -317,12 +296,12 @@ export default function Home() {
               </div>
               <div>
                 <Dropdown.Button menu={busMenuProps}>
-                  {selectedBuses.length > 0 ? `Bus ${selectedBuses.join(', ')}` : 'Select Bus'}
+                  {selectedBuses.length > 0 ? `Bus ${selectedBuses.join(', ')}` : 'Chọn xe'}
                 </Dropdown.Button>
 
               </div>
               <div onClick={handleAll}>
-                <Button>Select All</Button>
+                <Button>Chọn tất cả</Button>
               </div>
             </div>
             <div className={styles['detailsTit1']}>
